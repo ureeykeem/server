@@ -11,6 +11,24 @@ class TariffController {
 
 			const { type, cost, count_requests, count_days } = req.body
 
+			if (!type) {
+				return next(ApiError.badRequest('Укажите тип тарифа'))
+			}
+
+			if (!cost) {
+				return next(ApiError.badRequest('Укажите стоимость'))
+			}
+
+
+			if (type === 'fixed' && !count_requests) {
+				return next(ApiError.badRequest('Укажите кол-во запросов'))
+			}
+
+
+			if (type === 'subscription' && !count_days) {
+				return next(ApiError.badRequest('Укажите кол-во дней'))
+			}
+			
 			const tariff = await tariffService.create(type, cost, count_requests, count_days)
 
 			return res.json(tariff);
