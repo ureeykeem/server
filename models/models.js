@@ -71,4 +71,27 @@ const models = {
 	Tariff,
 };
 
+export const createAdminUser = async () => {
+	try {
+		await User.sync(); // Создает таблицу, если её нет (или обновляет схему)
+
+		const adminExists = await User.findOne({ where: { email: 'ikim.trader@gmail.com' } });
+
+		if (!adminExists) {
+			const hashedPassword = await bcrypt.hash('123', 10); // Хешируем пароль
+			await User.create({
+				email: 'ikim.trader@gmail.com',
+				password: hashedPassword,
+				role: 'ADMIN',
+			});
+
+			console.log('✅ Админ создан: ikim.trader@gmail.com');
+		} else {
+			console.log('⚠️ Админ уже существует');
+		}
+	} catch (error) {
+		console.error('❌ Ошибка при создании админа:', error);
+	}
+}
+
 export default models
