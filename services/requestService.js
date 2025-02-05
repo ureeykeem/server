@@ -9,7 +9,7 @@ import fse from 'fs-extra/esm'
 import mammoth from 'mammoth';
 import WordExtractor from 'word-extractor';
 import path from 'path';
-import pdfParse from 'pdf-parse/lib/pdf-parse';
+import pdfParse from 'pdf-parse/lib/pdf-parse.js';
 dotenv.config();
 
 const openai = new OpenAI({
