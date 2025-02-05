@@ -7,7 +7,7 @@ import sequelize from './db.js';
 import router from './routes/index.js';
 import errorHandler from './middleware/errorMiddleware.js';
 import './cleaner.js'
-import authMiddleware from './middleware/authMiddleware.js';
+import { createAdminUser } from './models/models.js';
 
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +25,7 @@ const start = async () => {
 		await sequelize.authenticate();
 
 		await sequelize.sync();
+		await createAdminUser();
 
 		app.listen(process.env.SERVER_PORT || 5000, () => {
 			console.log(`Server starting on port ${process.env.SERVER_PORT || 5000}`);
