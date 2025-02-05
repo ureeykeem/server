@@ -180,7 +180,7 @@ class UserController {
 
 	async removeUser(req, res, next) {
 		try {
-			const { id } = req.body
+			const id = req.params.id;
 
 			await userService.removeUser(id);
 
