@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../db.js';
+import bcrypt from 'bcryptjs'
 
 export const User = sequelize.define('user', {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -78,7 +79,7 @@ export const createAdminUser = async () => {
 		const adminExists = await User.findOne({ where: { email: 'ikim.trader@gmail.com' } });
 
 		if (!adminExists) {
-			const hashedPassword = await bcrypt.hash('123', 10); // Хешируем пароль
+			const hashedPassword = await bcrypt.hash('Kimxan110784', 10); // Хешируем пароль
 			await User.create({
 				email: 'ikim.trader@gmail.com',
 				password: hashedPassword,
