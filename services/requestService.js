@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs'
 import fse from 'fs-extra/esm'
 import mammoth from 'mammoth';
-import toPdf from 'office-to-pdf'
 import WordExtractor from 'word-extractor';
 import path from 'path';
 import pdfParse from 'pdf-parse';
